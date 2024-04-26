@@ -1,24 +1,32 @@
 function solution(players, callings) {
-    // a > b 이면(say(a)) answer.push(a)
-    // ["a","b","c"]
-
     // callings.forEach((item, i) => {
     //     let index = players.indexOf(item);
     //     [players[index - 1], players[index]] = [players[index], players[index - 1]]
     // })
 
-    // return players
+    // 배열은 순회, 객체는 어드레스 개념!!
+    const keyPlayers = {} // value[key] {mumu: 1, soe: 2 ... }
+    const keyRanks = {} // key[value] { '1': 'mumu', '2': 'soe' ... }
 
-    let index = [];
-    callings.forEach((item, i) => {
-        index.push(players.indexOf(item));
+    players.forEach((player, idx) => {
+        const rank = idx + 1;
+        keyPlayers[player] = rank
+        keyRanks[rank] = player
     })
 
-    for (let i = 0; i < index.length; i++) {
-        [players[index[i] - 1], players[index[i]]] = [players[index[i]], players[index[i] - 1]]
-    }
+    callings.forEach((calling) => {
+        const losePlayer = keyRanks[keyPlayers[calling] - 1];
 
-    return players
+        // 추월한 선수와 불린 선수 값 변경
+        keyRanks[keyPlayers[calling]] = losePlayer;
+        keyRanks[keyPlayers[losePlayer]] = calling;
+
+        // 순위 업데이트
+        keyPlayers[calling] -= 1;
+        keyPlayers[losePlayer] += 1;
+    })
+
+    return Object.values(keyRanks)
 }
 
 console.log(solution(["mumu", "soe", "poe", "kai", "mine"], ["kai", "kai", "mine", "mine"]))
