@@ -11,9 +11,19 @@
 */
 
 function solution(ineq, eq, n, m) {
-    return eq === "!"
-    ? (n,ineq,m ? 0 : 1)
-    : (n,ineq+eq,m ? 1 : 0)
+    if(eq === "!"){
+        return eval(n+ineq+m) ? 1 : 0
+    } else {
+        return eval(n+ineq+eq,m) ? 1 : 0
+    }
 }
 
 console.log(solution(">","!",41,78))
+
+/*
+function solution(ineq, eq, n, m) {
+    var str = (n + ineq + eq + m).replace("!","")
+    var answer = eval(str) ? 1 : 0;
+    return answer;
+}
+*/
