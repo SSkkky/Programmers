@@ -13,10 +13,12 @@ function solution(n) {
 for(let i=2; i<=n; i+=2){ answer+=i }
 
 2) 수학공식을 코드로 (하 짱이당)
+짝수 합 공식이 (n/2)(n/2 + 1) 인데 n이 홀수일 수 있으니 floor로 깔꼼하게 자르고 계산!
+
 function solution(n) {
     var half = Math.floor(n/2); 9이면 8로 컷팅
     return half*(half+1);
 }
 
-짝수 합 공식이 (n/2)(n/2 + 1) 인데 n이 홀수일 수 있으니 floor로 깔꼼하게 자르고 계산!
+
 */
